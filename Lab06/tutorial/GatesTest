@@ -1,0 +1,69 @@
+#! /usr/bin/vvp
+:ivl_version "10.2 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x55b2c89190 .scope module, "GatesTest" "GatesTest" 2 1;
+ .timescale 0 0;
+v0x55b2ce5920_0 .var "in", 0 1;
+v0x55b2ce59e0_0 .net "out", 0 2, L_0x55b2ce5fc0;  1 drivers
+S_0x55b2c89310 .scope module, "DUT" "Gates" 2 10, 3 1 0, S_0x55b2c89190;
+ .timescale 0 0;
+    .port_info 0 /INPUT 2 "in"
+    .port_info 1 /OUTPUT 3 "out"
+L_0x55b2ce5ab0 .functor AND 1, L_0x55b2ce5bb0, L_0x55b2ce5ca0, C4<1>, C4<1>;
+L_0x55b2ce5d90 .functor OR 1, L_0x55b2ce5e00, L_0x55b2ce5ef0, C4<0>, C4<0>;
+L_0x55b2ce6150 .functor XOR 1, L_0x55b2ce6210, L_0x55b2ce6340, C4<0>, C4<0>;
+v0x55b2cbfe30_0 .net *"_s0", 0 0, L_0x55b2ce5ab0;  1 drivers
+v0x55b2ce4fd0_0 .net *"_s11", 0 0, L_0x55b2ce5ef0;  1 drivers
+v0x55b2ce50b0_0 .net *"_s12", 0 0, L_0x55b2ce6150;  1 drivers
+v0x55b2ce5170_0 .net *"_s16", 0 0, L_0x55b2ce6210;  1 drivers
+v0x55b2ce5250_0 .net *"_s18", 0 0, L_0x55b2ce6340;  1 drivers
+v0x55b2ce5380_0 .net *"_s3", 0 0, L_0x55b2ce5bb0;  1 drivers
+v0x55b2ce5460_0 .net *"_s5", 0 0, L_0x55b2ce5ca0;  1 drivers
+v0x55b2ce5540_0 .net *"_s6", 0 0, L_0x55b2ce5d90;  1 drivers
+v0x55b2ce5620_0 .net *"_s9", 0 0, L_0x55b2ce5e00;  1 drivers
+v0x55b2ce5700_0 .net "in", 0 1, v0x55b2ce5920_0;  1 drivers
+v0x55b2ce57e0_0 .net "out", 0 2, L_0x55b2ce5fc0;  alias, 1 drivers
+L_0x55b2ce5bb0 .part v0x55b2ce5920_0, 1, 1;
+L_0x55b2ce5ca0 .part v0x55b2ce5920_0, 0, 1;
+L_0x55b2ce5e00 .part v0x55b2ce5920_0, 1, 1;
+L_0x55b2ce5ef0 .part v0x55b2ce5920_0, 0, 1;
+L_0x55b2ce5fc0 .concat8 [ 1 1 1 0], L_0x55b2ce6150, L_0x55b2ce5d90, L_0x55b2ce5ab0;
+L_0x55b2ce6210 .part v0x55b2ce5920_0, 1, 1;
+L_0x55b2ce6340 .part v0x55b2ce5920_0, 0, 1;
+    .scope S_0x55b2c89190;
+T_0 ;
+    %vpi_call 2 6 "$dumpfile", "GatesTest.vcd" {0 0 0};
+    %vpi_call 2 7 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x55b2c89190 {0 0 0};
+    %end;
+    .thread T_0;
+    .scope S_0x55b2c89190;
+T_1 ;
+    %delay 0, 0;
+    %pushi/vec4 0, 0, 2;
+    %store/vec4 v0x55b2ce5920_0, 0, 2;
+    %delay 10, 0;
+    %pushi/vec4 1, 0, 2;
+    %store/vec4 v0x55b2ce5920_0, 0, 2;
+    %delay 10, 0;
+    %pushi/vec4 2, 0, 2;
+    %store/vec4 v0x55b2ce5920_0, 0, 2;
+    %delay 10, 0;
+    %pushi/vec4 3, 0, 2;
+    %store/vec4 v0x55b2ce5920_0, 0, 2;
+    %delay 10, 0;
+    %pushi/vec4 0, 0, 2;
+    %store/vec4 v0x55b2ce5920_0, 0, 2;
+    %vpi_call 2 18 "$finish" {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "GatesTest.v";
+    "Gates.v";
