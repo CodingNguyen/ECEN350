@@ -81,28 +81,6 @@ module singlecycle(
     * Do not forget any additional multiplexers that may be required.
     */
 
-    // next PC logic
-    NextPClogic NextPClogic(
-        .NextPC(nextpc),
-        .CurrentPC(currentpc),
-        .SignExtImm64(extimm),
-        .Branch(branch),
-        .ALUZero(zero),
-        .Uncondbranch(uncond_branch)
-    );
-
-    // register file + corresponding mux
-    RegisterFile RegisterFile(
-        .BusA(regoutA),
-        .BusB(regoutB),
-        .BusW(dataMUX),
-        .RA(rm),
-        .RB(rn),
-        .RW(rd),
-        .RegWr(regwrite),
-        .Clk(CLK)
-    );
-
     // sign extender
     SignExtender SignExtender(
         .BusImm(extimm),
@@ -122,6 +100,9 @@ module singlecycle(
     );
 
     // data memory
+    wire [63:0] dataMUX; // output of data memory MUX
+    assign dataMUX = mem2reg ? dmemout : aluout;
+    
     DataMemory DataMemory(
         .ReadData(dmemout),
         .Address(aluout),
@@ -131,7 +112,26 @@ module singlecycle(
         .Clock(CLK)
     );
 
-    wire [63:0] dataMUX; // output of data memory MUX
-    assign dataMUX = mem2reg ? dmemout : aluout;
+    // register file + corresponding mux
+    RegisterFile RegisterFile(
+        .BusA(regoutA),
+        .BusB(regoutB),
+        .BusW(dataMUX),
+        .RA(rm),
+        .RB(rn),
+        .RW(rd),
+        .RegWr(regwrite),
+        .Clk(CLK)
+    );
+
+    // next PC logic
+    NextPClogic NextPClogic(
+        .NextPC(nextpc),
+        .CurrentPC(currentpc),
+        .SignExtImm64(extimm),
+        .Branch(branch),
+        .ALUZero(zero),
+        .Uncondbranch(uncond_branch)
+    );
 endmodule
 
