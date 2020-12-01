@@ -17,14 +17,12 @@ module NextPClogic(NextPC, CurrentPC, SignExtImm64, Branch, ALUZero, Uncondbranc
 
        wire [63:0] muxOutput; // result of MUX
        assign muxOutput = muxControl ? shiftSignExt : 4;
-       // always @ (muxControl)
-       // begin
-       //        // MUX logic
-       //        if(muxControl)
-       //               muxOutput <=  #3 CurrentPC + shiftSignExt;
-       //        else
-       //               muxOutput <= #2 CurrentPC + 4;
-       // end
+
+       always @ (*)
+       begin
+              if(muxControl) #3;
+              else #2;
+       end
 
        assign NextPC = CurrentPC + muxOutput; // Assign next PC
 endmodule
