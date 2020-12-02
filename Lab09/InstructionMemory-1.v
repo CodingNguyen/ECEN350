@@ -76,8 +76,8 @@ module InstructionMemory(Data, Address);
 	63'h050: Data = 32'b11010010100110111101111000001011; // 50: MOVZ x11, 0xdef0, LSL 0 // (x11 = 0xdef0 * 2^0)
 	63'h054: Data = 32'b10001011000010010000000101101001; // 54: ADD X9, x11, X9 // add result of MOVZ in x11 to x9
 			
-	// 63'h058: Data = 32'b11111000000000011100001111101001; // 58: STUR X9, [XZR, 0x28] // store constant in memory
-	// 63'h05c: Data = 32'b11111000010000011100001111101010; // 5c: LDUR X10, [XZR, 0x28] // Load constant into x10
+	63'h058: Data = 32'b11111000000000011100001111101001; // 58: STUR X9, [XZR, 0x28] // store constant in memory
+	63'h05c: Data = 32'b11111000010000011100001111101010; // 5c: LDUR X10, [XZR, 0x28] // Load constant into x10
 	default: Data = 32'hXXXXXXXX;
       endcase
    end
