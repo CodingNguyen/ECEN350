@@ -88,6 +88,12 @@ module SingleCycleProcTest_v;
         // ***********************************************************
         // Add your new tests here
         // ***********************************************************
+        while (currentPC < 64'h68)
+        begin
+           #(1 * `ClockPeriod);
+           $display("CurrentPC:%h", currentPC);
+        end
+        passTest(dMemOut, 64'h123456789abcdef0, "Results of Program 2", passed);
 
         // Done
         allPassed(passed, 2);   // Be sure to change the one to match
